@@ -5,13 +5,13 @@ import com.demo.DataReciever.entity.Data;
 import com.demo.DataReciever.repository.IDataRepository;
 import com.demo.DataReciever.service.IDataService;
 import com.demo.DataReciever.util.DataUtils;
+import com.google.common.io.Files;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +26,12 @@ public class IDataServiceImpl
     private IDataRepository iDataRepository;
 
     @Override
-    public String uploadData(MultipartFile file, String fileName, LocalDateTime timeSent) throws
+    public String uploadData(MultipartFile file, String fileName, Long timeSent) throws
             IOException {
         Data data = iDataRepository.save(Data.builder()
                                              .fileName(fileName)
                                              .fileSize(file.getSize())
-                                             .fileType(file.getContentType())
+                                             .fileType(Files.getFileExtension(fileName))
                                              .timeSent(timeSent)
                                              .content(DataUtils.compressData(file.getBytes()))
                                              .build());
@@ -47,9 +47,14 @@ public class IDataServiceImpl
 
     @Override
     public List<DataDTO> getAllFiles() {
-        return iDataRepository.findAll()
-                              .stream()
-                              .map((element) -> modelMapper.map(element, DataDTO.class))
-                              .toList();
+        List<Data> dataList = iDataRepository.findAll();
+        return dataList.stream()
+                       .map((data) -> {
+                           DataDTO dataDTO = modelMapper.map(data, DataDTO.class);
+                           dataDTO.setTimeReceivedUnix(data.getTimeReceived()
+                                                           .getTime());
+                           return dataDTO;
+                       })
+                       .toList();
     }
 }

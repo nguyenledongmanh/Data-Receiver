@@ -16,6 +16,6 @@ public class DataDTO {
     private String fileName;
     private String fileType;
     private Long fileSize;
-    private LocalDateTime timeReceived;
-    private LocalDateTime timeSent;
+    private Long timeReceivedUnix;
+    private Long timeSent;
 }

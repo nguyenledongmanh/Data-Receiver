@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IDataService {
-    String uploadData(MultipartFile file, String fileName, LocalDateTime timeSent) throws
+    String uploadData(MultipartFile file, String fileName, Long timeSent) throws
             IOException;
 
     byte[] getData(Long id);

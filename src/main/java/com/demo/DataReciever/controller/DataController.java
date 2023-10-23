@@ -24,7 +24,7 @@ public class DataController {
     @PostMapping("")
     public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file,
                                              @RequestParam("file_name") String fileName,
-                                             @RequestParam("time_sent") LocalDateTime timeSent) throws
+                                             @RequestParam("time_sent") Long timeSent) throws
             IOException {
         return new ResponseEntity<>(iDataService.uploadData(file, fileName, timeSent), HttpStatus.OK);
     }
