@@ -1,6 +1,7 @@
 package com.demo.DataReciever.controller;
 
 import com.demo.DataReciever.dto.DataDTO;
+import com.demo.DataReciever.dto.DataFromClient;
 import com.demo.DataReciever.service.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,9 @@ public class DataController {
 
     // create Data
     @PostMapping("")
-    public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file,
-                                             @RequestParam("file_name") String fileName,
-                                             @RequestParam("time_sent") Long timeSent) throws
+    public ResponseEntity<String> uploadData(@RequestBody DataFromClient data) throws
             IOException {
-        return new ResponseEntity<>(iDataService.uploadData(file, fileName, timeSent), HttpStatus.OK);
+        return new ResponseEntity<>(iDataService.uploadData(data), HttpStatus.OK);
     }
 
     @GetMapping("")

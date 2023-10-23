@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "data", uniqueConstraints = @UniqueConstraint(columnNames = {"file_name"}))
+@Table(name = "data")
 @Builder
 public class Data {
     @Id
@@ -23,11 +23,10 @@ public class Data {
     @Column(name = "file_type", nullable = false)
     private String fileType;
     @Column(name = "file_size", nullable = false)
-    private Long fileSize;
+    private int fileSize;
 
-    @CreationTimestamp
     @Column(name = "time_received")
-    private Date timeReceived;
+    private Long timeReceived;
     @Column(name = "time_sent", nullable = false)
     private Long timeSent;
     @Lob
