@@ -8,10 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
@@ -33,8 +32,4 @@ public class DataController {
         return ResponseEntity.ok(iDataService.getAllFiles());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getData(@PathVariable Long id) {
-        return ResponseEntity.ok(iDataService.getData(id));
-    }
 }

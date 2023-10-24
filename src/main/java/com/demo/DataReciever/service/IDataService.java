@@ -12,7 +12,5 @@ public interface IDataService {
     String uploadData(DataFromClient data) throws
             IOException;
 
-    byte[] getData(Long id);
-
     List<DataDTO> getAllFiles();
 }
