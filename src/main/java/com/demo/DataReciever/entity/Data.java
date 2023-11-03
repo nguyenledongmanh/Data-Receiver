@@ -2,10 +2,6 @@ package com.demo.DataReciever.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -18,18 +14,18 @@ public class Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "file_name", nullable = false)
+    @Column(name = "file_name")
     private String fileName;
-    @Column(name = "file_type", nullable = false)
+    @Column(name = "file_type")
     private String fileType;
-    @Column(name = "file_size", nullable = false)
+    @Column(name = "content_length")
     private int fileSize;
-
     @Column(name = "time_received")
     private Long timeReceived;
-    @Column(name = "time_sent", nullable = false)
+    @Column(name = "time_sent")
     private Long timeSent;
+
     @Lob
-    @Column(name = "file_content", length = 1000000)
+    @Column(length = 500*1024)
     private byte[] content;
 }

@@ -16,6 +16,5 @@ public class DataFromClient {
     private String fileType;
     private int fileSize;
     private double timeSent;
-
-    private String contentStr;
+    private String content;
 }
